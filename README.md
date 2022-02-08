@@ -16,9 +16,11 @@ To do so, ***I will refactor this application into a microservice architecture u
 ![image1](docs/architecture_design.png)
 
 ### Documentation 
-![image11](docs/img1.png)
-![image12](docs/img2.png)
-![image13](docs/img3.png)
+![image2](docs/img1.png)
+
+![image3](docs/img2.png)
+
+![image3](docs/img3.png)
                 
 
 ### kubectl get pods
