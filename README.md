@@ -15,6 +15,9 @@ To do so, ***I will refactor this application into a microservice architecture u
 ### Dependency graph
 ![image1](docs/architecture_design01.png)
 
+### Architecture diagram 
+![image1](docs/architecture_design02.png)
+
 ### Documentation 
 ![image2](docs/img1.png)
 
