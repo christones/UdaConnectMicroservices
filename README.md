@@ -83,7 +83,7 @@ Once the project is up and running, you should be able to see 3 deployments and 
 ### Lets start refactorying
 We are going from Monolith to creating two extra microservices that are to exchange via message passing (gRPC, REST, Kafka queues ...)
 ##### docker-compose.yaml
-I have created Two API (Application Programming Interfaces) namely Location_api and Persom_api
+I have created Two Microservices directories namely Location_api and Person_api having each a Dockerfile ready for building.
 ![image6](docs/img8.png) 
 
 
