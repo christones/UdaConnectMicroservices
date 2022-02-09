@@ -24,10 +24,10 @@ To do so, ***I will refactor this application into a microservice architecture u
                 
 
 ### kubectl get pods
-![image3](docs/pods_screenshot.png)
+![image3](docs/img4.png)
 
 ### kubectl get services
-![image4](docs/services_screenshot.png) 
+![image4](docs/img5.png) 
 
 ### Technologies
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/) - API webserver
