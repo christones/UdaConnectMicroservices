@@ -12,7 +12,7 @@ Management loved the POC so now that there is buy-in, we want to enhance this ap
 
 To do so, ***I will refactor this application into a microservice architecture using message passing techniques that I have learned in this course***.These message passing techniaues are gRPC, REST and Kafka message queues.  It’s easy to get lost in the countless optimizations and changes that can be made: my priority will be to approach the task as an architect and refactor the application into microservices. File organization, code linting -
 
-### Archictecture Diagram
+### Dependency graph
 ![image1](docs/architecture_design01.png)
 
 ### Documentation 
