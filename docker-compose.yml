@@ -6,3 +6,54 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+
+ api:
+    build: api
+    command: ["flask", "run", "--host=0.0.0.0"]
+    volumes:
+      - ./api:/app:/udaconnect 
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=controllers.py
+    ports:
+      - "5000:5000"
+
+location_api : 
+    build: location_api
+    command: ["flask", "run", "--host=0.0.0.0"]
+    volumes:
+      - ./location_api:/backend
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=controllers.py
+    ports:
+      - "5001:5000"     
+
+person_api : 
+    build: person_api
+    command: ["flask", "run", "--host=0.0.0.0"]
+    volumes:
+      - ./person_api:/backend
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=controllers.py
+    ports:
+      - "5002:5000"   
+
+ frontend:
+    tty: true
+    build: frontend
+    command: ["npm", "start"]
+    volumes:
+      - ./frontend:/public
+    environment:
+      - NODE_ENV=development
+    ports:
+      - '3000:3000'
+    depends_on:
+      - api
+      
+      
+volumes:
+  node-modules:
+

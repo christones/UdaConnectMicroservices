@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
     epsilondevops.vm.network 'private_network', ip: "192.168.0.200",  virtualbox__intnet: true
     epsilondevops.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh", disabled: true
     epsilondevops.vm.network "forwarded_port", guest: 22, host: 2001 # Master Node SSH
-    epsilondevops.vm.network "forwarded_port", guest: 6444, host: 6444 # API Access
+    epsilondevops.vm.network "forwarded_port", guest: 6444, host: 6445 # API Access
     for p in 30000..30100 # expose NodePort IP's
       epsilondevops.vm.network "forwarded_port", guest: p, host: p, protocol: "tcp"
       end
