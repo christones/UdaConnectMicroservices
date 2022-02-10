@@ -22,18 +22,18 @@ location_api :
     build: location_api
     command: ["flask", "run", "--host=0.0.0.0"]
     volumes:
-      - ./location_api:/backend
+      - ./REST_API/location_api:/backend
     environment:
       - FLASK_ENV=development
       - FLASK_APP=controllers.py
     ports:
       - "5001:5000"     
 
-person_api : 
+person_api :
     build: person_api
     command: ["flask", "run", "--host=0.0.0.0"]
     volumes:
-      - ./person_api:/backend
+      - ./REST_API/person_api:/backend
     environment:
       - FLASK_ENV=development
       - FLASK_APP=controllers.py

@@ -1,5 +1,7 @@
-from app.udaconnect.models import Connection, Location, Person  # noqa
-from app.udaconnect.schemas import ConnectionSchema, LocationSchema, PersonSchema  # noqa
+from flask import Flask
+
+app = Flask(__name__)
+
 
 
 def register_routes(api, app, root="api"):
