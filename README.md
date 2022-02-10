@@ -164,7 +164,7 @@ Note: The first time you run this project, you will need to seed the database wi
 Once the project is up and running, you should be able to see 3 deployments and 3 services in Kubernetes:
 `kubectl get pods` and `kubectl get services` - should both return `udaconnect-app`, `udaconnect-api`, and `postgres`
 
-### Lets start refactorying
+### Lets start refactoring
 We are going from Monolith to creating two extra microservices that are to exchange via message passing (gRPC, REST, Kafka queues ...)
 ##### docker-compose.yaml
 I have created Two Microservices directories namely Location_api and Person_api having each a Dockerfile ready for building.
