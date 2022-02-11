@@ -26,7 +26,6 @@ class LocationService:
 
         return  location
        
-    
 
     @staticmethod
     def create(location: Dict) -> Location:
