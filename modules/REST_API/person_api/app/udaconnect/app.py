@@ -1,7 +1,7 @@
 import json
 from flask import Flask, jsonify, request
 
-from .services.PersonService import retrieve, create
+from .services import retrieve, create
 
 app = Flask(__name__)
 
