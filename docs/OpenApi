@@ -1,10 +1,81 @@
 openapi: 3.0.0
 info:
-  description: Locating data from mobile devices.
-  version: "1.0.0"
-  title: Simple Inventory API
+  version: '1.0.0'
+  title: 'Location_api'
+  license:
+    name: MIT
+servers:
+  - url: 'localhost:3000'
 paths:
-  /location/{locationId}:
+  /getperson/{personId}:
+    get:
+      summary: 'Sample endpoint: Returns details about a particular person'
+      operationId: listPerson
+      tags:
+        - person
+      parameters:
+        - name: personId
+          in: query
+          description: ID of the person
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: 'Sample response: Details about a user by ID'
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/person'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+ /addperson :
+      post:
+      summary: Creates somebody tuple informations
+      operationId: addPerson
+      description: Registers a new person to the system
+      responses:
+        '201':
+          description: Person created
+        '400':
+          description: Invalid input, object invalid
+        '409':
+          description: An existing tuple already exists for the same dude
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Persons'
+            description: Registering a person 
+  /locations:
+    post:
+      summary: Creates peoples locations
+      operationId: addLocation
+      description: Adds a new location to the system
+      responses:
+        '201':
+          description: Location created
+        '400':
+          description: Invalid input, object invalid
+        '409':
+          description: An existing location already exists for the same dude
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Locations'
+        description: Creating a new location for somebody
+   /location/{locationId}:
     get:
       summary: 
       operationId: getLocation
@@ -25,87 +96,33 @@ paths:
                 $ref: '#/components/schemas/LocationID'
         '404':
           description: Requested item location was not found
-  /locations:
-    post:
-      summary: Creates peoples locations
-      operationId: addLocation
-      description: Adds a new location to the system
-      responses:
-        '201':
-          description: Location created
-        '400':
-          description: Invalid input, object invalid
-        '409':
-          description: An existing location already exists for the same dude
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Locations'
-        description: Creating a new location for somebody
-   /person/{personId}
-      get:
-        summary:
-        operationId: getPerson
-        description: By passing it in a person you can get his full information
-        parameters:
-           -in: path
-            name: personId
-            schema:
-              type: integer
-              required: 14
-              descriptioin: ID of the person to get
-       responses:
-        '200':
-          description: Successfully retrieved a person
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/personID'
-        '404':
-          description: Requested person was not found
-     /persons
-      post:
-      summary: Creates somebody tuple informations
-      operationId: addPerson
-      description: Registers a new person to the system
-      responses:
-        '201':
-          description: Person created
-        '400':
-          description: Invalid input, object invalid
-        '409':
-          description: An existing tuple already exists for the same dude
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Persons'
-        description: Registering somebody
-      /person/{personId}/connection 
-        get:
-        summary:
-        operationId: getPersonConnection
-        description: By passing it in a person you can get his current location
-        parameters:
-           -in: path
-            name: personId
-            schema:
-              type: integer
-              required: 14
-              descriptioin: ID of the person to get
-       responses:
-        '200':
-          description: Successfully retrieved a person location
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/personID'
-        '404':
-          description: Requested person was not found
 components:
   schemas:
-    Locations:
+    Person:
+      type: object
+      required:
+        - personId
+        - name
+      properties:
+        personId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        tag:
+          type: string
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    Location:
       type: object
       required:
         - id
@@ -129,36 +146,9 @@ components:
         creation_time:
          type: Date
          example: 02/02/2022
-     Persons : 
-       type: object
-       required: 
-        - id
-        - first_name
-        - last_name
-        - company_name
-       properties:
-        id:
-          type: integer
-          example: 1
-        first_name:
-          type: string
-          example: Ojong
-        last_name:
-          type: string
-          example: Rigobert
-        company_name:
-          type: string
-          example: Hero Tech
-      Connections 
-        type: object
-        required:
-        - location
-        - person
-        properties:
-          location:
-           type: Locations
-          person:
-           type: Persons 
-                
-          
-      	    
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+security:
+  - BasicAuth: []
