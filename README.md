@@ -13,3 +13,6 @@ From studying the source code of the Udaconnect application we derived a depende
 The message passing techniques we are going to use are gRPC, REST and Kafka message queues. The gRPC will be used by the connection service to access the object values of each location with its corresponding person at the same time. This is because gRPC may be used by modules in a microservice to pass messages with one another. The REST will be implemented between the person service standing as a client to request his/her longitude and latitude to the location service. This is because the response to the request will be received as JSON formattted information. The Kafka message queue shall be made between the user of the application or main program and the connection service. At this level the connection service will act as the producer while the main program will simply consume.
 
 ### Screenshots of the pod and services deployments 
+![image](docs/pods_screenshot.png) 
+
+![image](docs/services_screenshot.png) 
