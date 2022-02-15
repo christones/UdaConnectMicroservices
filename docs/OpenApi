@@ -7,7 +7,7 @@ info:
 servers:
   - url: 'localhost:3000'
 paths:
-  /getperson/{personId}:
+  /getperson:
     get:
       summary: 'Sample endpoint: Returns details about a particular person'
       operationId: listPerson
@@ -75,7 +75,7 @@ paths:
             schema:
               $ref: '#/components/schemas/Locations'
         description: Creating a new location for somebody
-   /location/{locationId}:
+   /location:
     get:
       summary: 
       operationId: getLocation
