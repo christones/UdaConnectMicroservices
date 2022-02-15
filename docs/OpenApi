@@ -5,7 +5,7 @@ info:
   license:
     name: MIT
 servers:
-  - url: 'localhost:3000'
+  - url: 'localhost: 3000'
 paths:
   /getperson:
     get:
@@ -39,25 +39,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
- /addperson :
-      post:
-      summary: Creates somebody tuple informations
-      operationId: addPerson
-      description: Registers a new person to the system
-      responses:
-        '201':
-          description: Person created
-        '400':
-          description: Invalid input, object invalid
-        '409':
-          description: An existing tuple already exists for the same dude
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Persons'
-            description: Registering a person 
-  /locations:
+/addlocation:
     post:
       summary: Creates peoples locations
       operationId: addLocation
@@ -75,7 +57,7 @@ paths:
             schema:
               $ref: '#/components/schemas/Locations'
         description: Creating a new location for somebody
-   /location:
+/getlocation:
     get:
       summary: 
       operationId: getLocation
@@ -144,7 +126,7 @@ components:
          type: string
          example: 38.8951
         creation_time:
-         type: Date
+         type: string
          example: 02/02/2022
   securitySchemes:
     BasicAuth:
