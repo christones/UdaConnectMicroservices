@@ -1,12 +1,3 @@
 
+The message passing techniques we will use are gRPC, REST, and Kafka message queues. The purpose is to keep track of all possible GPS information sent by mobile phones of each participant or person. Since a single person is meant to be as mobile as possible, retrieving these locations by user ID can be cumbersome and slow to manage by a REST API. So we will need a Kafka queue between the two location microservices where one will receive the three input values ​​i.e. longitude, latitude and user id as a gRPC message from each user's mobile phone, while the second will consume each produced stream as a record and store each record one after another in the udaconnect_location.sql database. The Connection Service interacts via a REST API with the Frontend of the application. The Person microservice is another REST API service that keeps track of user information. Whenever the entry point location microservice receives a gRPC message regarding a participant's location, a REST request should be made to the Person service to check if the person belongs the system.
 
-
-
-The message passing techniques we are going to use are gRPC, REST and Kafka message queues.
- The gRPC will be used by the connection service to access the object values of each location of a given person 
-  at the same moment the person's ID can be requested through the first REST API.
-  This is because gRPC may be used by modules in a microservice to pass messages with one another.
-   The REST Location_API will be implemented between the person service standing as a client to request his/her longitude and latitude to the location service.
-    This is because the response to the request will be received as JSON formattted information very much easy to serialize and transmit as bits than SQL tuples. 
-     The Kafka message queue shall be made between the user of the application or main program and the connection service.
-      At this level the connection service will act as the producer while the main program will simply consume.
