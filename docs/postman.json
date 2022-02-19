@@ -1,113 +1,175 @@
-{
-	"info": {
-		"_postman_id": "9b5f8ae7-98dd-4deb-a2d2-1e340e2b0cd9",
-		"name": "PersonMicroservice",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "POST person",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"first_name\": \"John\",\n\"last_name\": \"Doe\",\n\"company_name\": \"Microsoft\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:30001/api/persons",
-					"host": [
-						"localhost"
-					],
-					"port": "30001",
-					"path": [
-						"api",
-						"persons"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:30002/api/persons/5/connection?start_date=2020-01-01&end_date=2020-12-30&distance=5",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:30002/api/persons/5/connection?start_date=2020-01-01&end_date=2020-12-30&distance=5",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "30002",
-					"path": [
-						"api",
-						"persons",
-						"5",
-						"connection"
-					],
-					"query": [
-						{
-							"key": "start_date",
-							"value": "2020-01-01"
-						},
-						{
-							"key": "end_date",
-							"value": "2020-12-30"
-						},
-						{
-							"key": "distance",
-							"value": "5"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET person by Id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:30001/api/persons/3",
-					"host": [
-						"localhost"
-					],
-					"port": "30001",
-					"path": [
-						"api",
-						"persons",
-						"3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET all persons",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:30001/api/persons",
-					"host": [
-						"localhost"
-					],
-					"port": "30001",
-					"path": [
-						"api",
-						"persons"
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"protocolProfileBehavior": {}
+﻿{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Person Endpoints",
+    "description": "This is a person API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/persons": {
+      "get": {
+        "tags": [
+          "gets people information"
+        ],
+        "summary": "gets all people information",
+        "description": "Gets the people information for all users in the PersonAPI\n",
+        "operationId": "getAllPersons",
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Person"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "creates a new person"
+        ],
+        "summary": "creates a new person record",
+        "description": "By passing the correct payload, you can create a\nnew person/user to the system\n",
+        "operationId": "createPerson",
+        "requestBody": {
+          "description": "Optional description in *Markdown*",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonNoId"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "created new person",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Person"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/api/persons/{personId}": {
+      "get": {
+        "tags": [
+          "gets person by id"
+        ],
+        "summary": "gets person information by id",
+        "description": "Gets person information by id\n",
+        "operationId": "getPersonById",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "Numeric ID of the user to get",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Person"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Person": {
+        "required": [
+          "company_name",
+          "first_name",
+          "id",
+          "last_name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "first_name": {
+            "type": "string",
+            "example": "Enanga"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Madeng"
+          },
+          "company_name": {
+            "type": "string",
+            "example": "Employer"
+          }
+        }
+      },
+      "PersonNoId": {
+        "required": [
+          "company_name",
+          "first_name",
+          "last_name"
+        ],
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "example": "Enanga"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Yolande"
+          },
+          "company_name": {
+            "type": "string",
+            "example": "Epsilon"
+          }
+        }
+      }
+    }
+  }
 }

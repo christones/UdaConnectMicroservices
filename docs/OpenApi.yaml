@@ -2,21 +2,8 @@
 openapi: 3.0.0
 info:
   title: Person Endpoints
-  description: This is a person API from Udacity
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: This is a person API
   version: 1.0.0
-servers:
-- url: https://virtserver.swaggerhub.com/Virtus5/Company/1.0.0
-  description: SwaggerHub API Auto Mocking
-- url: http://localhost:30001/
-  description: Person API - Udacity Cloud
-tags:
-- name: admins
-  description: Secured Admin-only calls
-- name: developers
-  description: Operations available to regular developers
 paths:
   /api/persons:
     get:
@@ -110,13 +97,13 @@ components:
           example: 1
         first_name:
           type: string
-          example: Francisco
+          example: Enanga
         last_name:
           type: string
-          example: Medeiros
+          example: Madeng
         company_name:
           type: string
-          example: SelfEmployed
+          example: Employer
     PersonNoId:
       required:
       - company_name
@@ -126,10 +113,10 @@ components:
       properties:
         first_name:
           type: string
-          example: Francisco
+          example: Enanga
         last_name:
           type: string
-          example: Medeiros
+          example: Yolande
         company_name:
           type: string
-          example: Virtus
+          example: Epsilon
